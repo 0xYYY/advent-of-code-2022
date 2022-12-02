@@ -4,7 +4,7 @@ use std::path::Path;
 
 // TODO: remove duplications
 
-pub fn solve1<P: AsRef<Path>>(input_path: P) -> Result<String> {
+fn read_input<P: AsRef<Path>>(input_path: P) -> Result<Vec<u32>> {
     let input = fs::read_to_string(input_path)?;
     let nums = input.split('\n').fold(vec![0], |mut acc, x| {
         match x.parse::<u32>() {
@@ -13,6 +13,11 @@ pub fn solve1<P: AsRef<Path>>(input_path: P) -> Result<String> {
         };
         acc
     });
+    Ok(nums)
+}
+
+pub fn solve1<P: AsRef<Path>>(input_path: P) -> Result<String> {
+    let nums = read_input(input_path)?;
     let max = nums.iter().max().unwrap();
 
     let result = format!("{max}");
@@ -21,14 +26,7 @@ pub fn solve1<P: AsRef<Path>>(input_path: P) -> Result<String> {
 }
 
 pub fn solve2<P: AsRef<Path>>(input_path: P) -> Result<String> {
-    let input = fs::read_to_string(input_path)?;
-    let mut nums = input.split('\n').fold(vec![0], |mut acc, x| {
-        match x.parse::<u32>() {
-            Ok(num) => *acc.last_mut().unwrap() += num,
-            Err(_) => acc.push(0),
-        };
-        acc
-    });
+    let mut nums = read_input(input_path)?;
     nums.sort();
     nums.reverse();
     let sum: u32 = nums[..3].iter().sum();
