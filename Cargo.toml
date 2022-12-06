@@ -1,9 +1,19 @@
 [package]
-name = "advent-of-code-2022-rs"
+name = "aoc22"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[toolchain]
+channel = "nightly"
 
 [dependencies]
-anyhow = "1.0.66"
+anyhow = "1.0.0"
+color-eyre = "0.6.2"
+test-case = "2.2.2"
+once_cell = "1.16.0"
+regex = "1.7.0"
+chrono = { version = "0.4.23", features = ["clock"] }
+clap = { version = "4.0.29", features = ["derive"] }
+reqwest = "0.11.13"
+scraper = "0.13.0"
+tokio = { version = "1.23.0", features = ["rt-multi-thread", "macros"] }

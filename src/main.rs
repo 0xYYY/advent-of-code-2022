@@ -1,11 +1,44 @@
-mod day01;
-mod day02;
+#![feature(iter_array_chunks)]
+#![feature(let_chains)]
+
+use color_eyre::Result;
+
+mod solutions;
+mod utils;
 
 // TODO: remove duplications
 
-fn main() {
-    day01::solve1("input/day01.txt").unwrap();
-    day01::solve2("input/day01.txt").unwrap();
-    day02::solve1("input/day02.txt").unwrap();
-    day02::solve2("input/day02.txt").unwrap();
+fn main() -> Result<()> {
+    color_eyre::install()?;
+
+    // solutions::day_01::solve1("testdata/day_01/puzzle/input.txt").unwrap();
+    // solutions::day_01::solve2("testdata/day_01/puzzle/input.txt").unwrap();
+    // solutions::day_02::solve1("testdata/day_02/puzzle/input.txt").unwrap();
+    // solutions::day_02::solve2("testdata/day_02/puzzle/input.txt").unwrap();
+    // solutions::day_03::solve1("testdata/day_03/puzzle/input.txt").unwrap();
+    // solutions::day_03::solve2("testdata/day_03/puzzle/input.txt").unwrap();
+    // solutions::day_04::solve1(
+    //     lib::InputPath(String::from("testdata/day_04/puzzle/input.txt"))
+    //         .try_into()
+    //         .unwrap(),
+    // )
+    // .unwrap();
+    // solutions::day_04::solve2(
+    //     lib::InputPath(String::from("testdata/day_04/puzzle/input.txt"))
+    //         .try_into()
+    //         .unwrap(),
+    // )
+    // .unwrap();
+    // println!(
+    //     "{}",
+    //     solutions::day_05::part1("testdata/day_05/puzzle/input.txt")?
+    // );
+    // println!(
+    //     "{}",
+    //     solutions::day_05::part2("testdata/day_05/puzzle/input.txt")?
+    // );
+    let input = utils::Input::new("testdata/day_06/puzzle/input.txt")?;
+    println!("{}", solutions::day_06::part1(input.try_into()?)?);
+
+    Ok(())
 }
