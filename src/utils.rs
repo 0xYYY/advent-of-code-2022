@@ -4,6 +4,10 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::str::FromStr;
 
+pub trait Cmd: clap::Parser + Sized {
+    async fn run(self) -> Result<()>;
+}
+
 pub struct Input<R: BufRead> {
     inner: R,
 }
