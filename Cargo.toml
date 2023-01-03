@@ -3,9 +3,6 @@ name = "aoc22"
 version = "0.1.0"
 edition = "2021"
 
-[toolchain]
-channel = "nightly"
-
 [dependencies]
 anyhow = "1.0.0"
 color-eyre = "0.6.2"
@@ -17,3 +14,5 @@ clap = { version = "4.0.29", features = ["derive"] }
 reqwest = "0.11.13"
 scraper = "0.13.0"
 tokio = { version = "1.23.0", features = ["rt-multi-thread", "macros"] }
+nom = "7.1.2"
+seq-macro = "0.3.2"

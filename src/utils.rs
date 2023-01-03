@@ -1,50 +1,34 @@
-use color_eyre::eyre::{self, eyre, Result, WrapErr};
-use std::fmt::Display;
-use std::fs::File;
-use std::io::{BufRead, BufReader};
-use std::str::FromStr;
+use clap::Parser;
+use color_eyre::eyre::{Result, WrapErr};
+use std::{fmt::Display, fs, path::Path};
 
-pub trait Cmd: clap::Parser + Sized {
+pub trait Cmd: Parser + Sized {
     async fn run(self) -> Result<()>;
 }
 
-pub struct Input<R: BufRead> {
-    inner: R,
-}
-
-impl Input<BufReader<File>> {
-    pub fn new(path: &str) -> Result<Self> {
-        Ok(Self {
-            inner: BufReader::new(File::open(path).wrap_err("Failed to open input file `{path}`")?),
-        })
-    }
-}
-
-impl<R: BufRead, T: FromStr> TryFrom<Input<R>> for Vec<T>
+pub fn read_file<P>(path: P) -> Result<String>
 where
-    T::Err: Display,
+    P: AsRef<Path> + Display + Copy,
 {
-    type Error = eyre::Error;
-
-    fn try_from(input: Input<R>) -> Result<Self, Self::Error> {
-        input
-            .inner
-            .lines()
-            .enumerate()
-            .map(|(line_number, line)| {
-                T::from_str(&line?)
-                    .map_err(|e| eyre!("Failed to parse line {}: {}", line_number + 1, e))
-            })
-            .collect()
-    }
+    fs::read_to_string(path).wrap_err(format!("Failed to read `{path}`"))
 }
 
-impl<R: BufRead> TryFrom<Input<R>> for String {
-    type Error = eyre::Error;
+pub fn write_file<P, C>(path: P, content: C) -> Result<()>
+where
+    P: AsRef<Path> + Display + Copy,
+    C: AsRef<[u8]>,
+{
+    fs::write(path, content).wrap_err(format!("Failed to update `{path}`"))
+}
 
-    fn try_from(mut input: Input<R>) -> Result<Self, Self::Error> {
-        let mut result = String::new();
-        input.inner.read_to_string(&mut result)?;
-        Ok(result.trim().into())
+pub fn fmt_day(day: u8) -> String {
+    format!("{:0>2}", day)
+}
+
+pub fn capitalize(s: &str) -> String {
+    let mut c = s.chars();
+    match c.next() {
+        None => String::new(),
+        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
     }
 }
