@@ -38,7 +38,7 @@ impl Solution for Puzzle {
         self.decode(4)
     }
 
-    /// Solution for part 1.
+    /// Solution for part 2.
     fn solve2(self) -> Result<Self::Output> {
         self.decode(14)
     }

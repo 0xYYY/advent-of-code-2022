@@ -85,7 +85,7 @@ impl Solution for Puzzle {
         Ok(sum)
     }
 
-    /// Solution for part 1.
+    /// Solution for part 2.
     fn solve2(self) -> Result<Self::Output> {
         let scores: [[u32; 3]; 3] = [[3, 4, 8], [1, 5, 9], [2, 6, 7]];
         let sum = self

@@ -128,7 +128,7 @@ impl Solution for Puzzle {
         self.top()
     }
 
-    /// Solution for part 1.
+    /// Solution for part 2.
     fn solve2(mut self) -> Result<Self::Output> {
         self.rearrange(true);
         self.top()

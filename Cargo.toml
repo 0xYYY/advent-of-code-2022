@@ -16,3 +16,4 @@ scraper = "0.13.0"
 tokio = { version = "1.23.0", features = ["rt-multi-thread", "macros"] }
 nom = "7.1.2"
 seq-macro = "0.3.2"
+camino = "1.1.1"

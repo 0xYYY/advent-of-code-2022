@@ -20,6 +20,7 @@ impl FromFile for Puzzle {
 impl Solution for Puzzle {
     type Output = u32;
 
+    /// Solution for part 1.
     fn solve1(self) -> Result<Self::Output> {
         self.iter()
             .max()
@@ -27,6 +28,7 @@ impl Solution for Puzzle {
             .copied()
     }
 
+    /// Solution for part 2.
     fn solve2(mut self) -> Result<Self::Output> {
         self.sort();
         self.reverse();

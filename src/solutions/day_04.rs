@@ -68,7 +68,7 @@ impl Solution for Puzzle {
         Ok(sum)
     }
 
-    /// Solution for part 1.
+    /// Solution for part 2.
     fn solve2(self) -> Result<Self::Output> {
         let sum: u32 = self.iter().map(|p| p.overlap() as u32).sum();
         Ok(sum)

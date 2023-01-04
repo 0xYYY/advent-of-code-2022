@@ -42,7 +42,7 @@ impl Solution for Puzzle {
         bail!("not yet implemented")
     }
 
-    /// Solution for part 1.
+    /// Solution for part 2.
     fn solve2(self) -> Result<Self::Output> {
         // TODO: Remove the following 2 lines and complete the implementation.
         use color_eyre::eyre::bail;

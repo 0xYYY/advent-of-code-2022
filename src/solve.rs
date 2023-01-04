@@ -20,7 +20,7 @@ pub struct Args {
 
 impl utils::Cmd for Args {
     async fn run(self) -> Result<()> {
-        seq!(D in 01..=06 {
+        seq!(D in 01..=08 {
             match self.day {
                 #(D => {
                     use crate::solutions::day_~D::Puzzle;
